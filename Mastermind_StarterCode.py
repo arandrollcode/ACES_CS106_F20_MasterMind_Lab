@@ -92,11 +92,15 @@ class MastermindGame:
     def get_guess(self):
         guess = (0,)
 
-        ## TODO: Read input, check if valid, repeat  until valid.
+        ## TODO: Read input, check if valid, repeat until valid.
         ## HINT: https://www.w3schools.com/python/ref_func_input.asp
         
-        ## print('Enter your guess: ')
-        ## print('Please enter a valid guess: Ex \'0123\'')
+        print('Enter your guess: ')
+        guess =
+
+        while !self.is_valid_guess(guess):
+            print('Please enter a valid guess: Ex \'0123\'')
+            guess = 
 
         return guess
 
@@ -115,8 +119,20 @@ class MastermindGame:
 
         print('The code is {0} digits from 0 - {1}. You have {2} guesses'.format(code_length, possible_nums - 1, max_guesses))
         
-        ## TODO
-        ## print('{0} has {1} correct numbers and {2} numbers in the correct position.'.format(guess, correct_nums, correct_positions)) 
+        ## TODO:
+        ## Generate code
+        
+        ## Get Player Guess
+        
+        ## Check Player Guess
+
+        print('{0} has {1} correct numbers and {2} numbers in the correct position.'.format(guess, correct_nums, correct_positions))
+
+        ## Check if player has won
+        if some_code_here:
+            print('Congratulations, you figured out the code!')
+        
+        ## Repeat 'max_guesses' number of times
 
         print('Darn, you ran out of guesses!')
         print('The code was {0}'.format(self.code))
