@@ -98,8 +98,8 @@ class MastermindGame:
             return False
         if len(string_guess) != self.code_length:
             return False
-        for num in self.code:
-            if num > self.possible_nums-1:
+        for num in string_guess:
+            if int(num) > int(self.possible_nums-1):
                 return False
         return True
 
@@ -109,7 +109,7 @@ class MastermindGame:
     ## Check if the guess is valid and ask again if it is not.
     def get_guess(self):
         guess = (0,)
-
+        result = []
         ## TODO: Read input, check if valid, repeat until valid.
         ## HINT: https://www.w3schools.com/python/ref_func_input.asp
         
@@ -120,7 +120,11 @@ class MastermindGame:
             print('Please enter a valid guess: Ex \'0123\'')
             guess = input()
 
-        return tuple(guess)
+        for char in guess:
+            char = int(char)
+            result.append(char)
+
+        return tuple(result)
 
 ##----------------------------------------------------------------------------##
 
@@ -133,27 +137,36 @@ class MastermindGame:
     
         ## Determines the number of guesses you get, you can change this to give
         ## yourself more or less guesses if you want.
-        max_guesses = int(code_length * possible_nums // 2.3)
+        max_guesses = int(code_length * possible_nums // 2.2)
 
-        print('The code is {0} digits from 0 - {1}. You have {2} guesses'.format(code_length, possible_nums - 1, max_guesses))
         
         ## TODO:
         ## Generate code
         self.generate_code()
+        print(self.code)
+        #print(self.code) #for testing
+        guesses_left = max_guesses
         ## Get Player Guess
-        guess = self.get_guess()
-        ## Check Player Guess
-        self.check_guess(guess)
-        print('{0} has {1} correct numbers and {2} numbers in the correct position.'.format(guess, correct_nums, correct_positions))
+        for times in range(0, max_guesses):
 
-        ## Check if player has won
-        if some_code_here:
-            print('Congratulations, you figured out the code!')
+            print('\nThe code is {0} digits from 0 - {1}. You have {2} guesses left'.format(code_length, possible_nums - 1, guesses_left))
+
+            guess = self.get_guess()
+            ## Check Player Guess
+            nums, positions = self.check_guess(guess)
+
+            print('{0} has {1} correct distinct numbers and {2} numbers in the correct position.'.format(guess, nums, positions))
+
+            ## Check if player has won
+            if nums and positions == self.code_length:
+                print('\nCongratulations, you figured out the code!')
+                break
+            guesses_left -= 1
         
-        ## Repeat 'max_guesses' number of times
-
-        print('Darn, you ran out of guesses!')
-        print('The code was {0}'.format(self.code))
+    ## Repeat 'max_guesses' number of times
+        if guesses_left <= 0:
+            print('\n\nWow, you ran out of guesses!')
+            print('The code was {0}'.format(self.code))
         
 ##----------------------------------------------------------------------------##
 
@@ -232,6 +245,6 @@ def test():
 ##----------------------------------------------------------------------------##
 
 if __name__ == "__main__":
-    test()
+    #test()
     game = MastermindGame()
     game.start()
