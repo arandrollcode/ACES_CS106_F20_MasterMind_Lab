@@ -137,13 +137,12 @@ class MastermindGame:
     
         ## Determines the number of guesses you get, you can change this to give
         ## yourself more or less guesses if you want.
-        max_guesses = int(code_length * possible_nums // 2.2)
+        max_guesses = int(code_length * possible_nums // 2)
 
         
         ## TODO:
         ## Generate code
         self.generate_code()
-        print(self.code)
         #print(self.code) #for testing
         guesses_left = max_guesses
         ## Get Player Guess
