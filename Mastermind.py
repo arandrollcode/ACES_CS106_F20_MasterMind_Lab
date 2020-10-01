@@ -18,6 +18,7 @@ class MastermindGame:
     ## Should include numbers between 0 and "possibilities"
     ## Ex. If "possibilities" = 3 then the code only has the numbers (0, 1, 2)
     def generate_code(self):
+      
         length = self.code_length
         possibilities = self.possible_nums
         fake_tuple = []
@@ -29,6 +30,7 @@ class MastermindGame:
             fake_tuple.append(num)
         
         self.code = tuple(fake_tuple)
+          
 ##----------------------------------------------------------------------------##
 
     ## Count how many times a number appears in the code
@@ -154,7 +156,7 @@ class MastermindGame:
             ## Check Player Guess
             nums, positions = self.check_guess(guess)
 
-            print('{0} has {1} correct distinct numbers and {2} numbers in the correct position.'.format(guess, nums, positions))
+            print('{0} has {1} correct numbers and {2} numbers in the correct position.'.format(str(guess), nums, positions))
 
             ## Check if player has won
             if nums and positions == self.code_length:
